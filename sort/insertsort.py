@@ -20,7 +20,7 @@ Simple Insert sort
 from random import random
 from time import time
 
-length = 5000
+length = 10000
 arraytoSort = [ int(random()*1000) for _ in range(length)]
 orgin = arraytoSort[:]
 
