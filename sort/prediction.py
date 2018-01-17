@@ -17,7 +17,8 @@
 from random import random
 from time import time
 
-#sort use predict methods
+#sort use prediction methods
+#base on insertion sort
 
 def perdict(list, value):
     endpoint = len(list) - 1

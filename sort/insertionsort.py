@@ -15,7 +15,7 @@
 """
 
 """
-Simple Insert sort
+Simple Insertion sort
 """
 from random import random
 from time import time

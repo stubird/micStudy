@@ -40,6 +40,7 @@ def partition(array, p, r):
         #print(rand1,' ', rand2,' ', rand3,' p',point,' ')
         #print(array[rand1], array[rand2], array[rand3])
         array[point], array[r] = array[r], array[point]
+    # optimal method end
 
     compare = array[r]
     while j < r:
@@ -58,6 +59,7 @@ def quicksort(array, p, r):
     quicksort(array,p,q - 1)
     quicksort(array,q+1,r)
 
+#test time spend
 #print(arraytoSort)
 timepoint = time()
 quicksort(arraytoSort,0,len(arraytoSort) - 1)
