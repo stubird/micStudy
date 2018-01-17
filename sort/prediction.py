@@ -40,7 +40,7 @@ def perdict(list, value):
     return ret
 
 length = 10000
-arraytoSort = [ int(random()*1000) for _ in range(length)]
+arraytoSort = [int(random()*1000) for _ in range(length)]
 orgin = arraytoSort[:]
 
 timepoint = time()

@@ -20,7 +20,7 @@ import sys
 import numpy as np
 
 length = 300000
-arraytoSort = [ int(random.random()*1000) for _ in range(length)]
+arraytoSort = [int(random.random()*1000) for _ in range(length)]
 orgin = arraytoSort[:]
 sys.setrecursionlimit(length)
 

@@ -21,7 +21,7 @@ from random import random
 from time import time
 
 length = 10000
-arraytoSort = [ int(random()*1000) for _ in range(length)]
+arraytoSort = [int(random()*1000) for _ in range(length)]
 orgin = arraytoSort[:]
 
 #because big array item swap operation, the algorithm is not efficient in python
