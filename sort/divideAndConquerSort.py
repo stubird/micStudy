@@ -37,19 +37,28 @@ def divConSort(A):
     a1 = A[:mid]
     a2 = A[mid:]
 
+
     a1Sorted = divConSort(a1)
     a2Sorted = divConSort(a2)
+    #print('a1Sorted',a1Sorted)
+    #print('a2Sorted',a2Sorted)
 
     return merge(a1Sorted, a2Sorted)
 
 def merge(a1, a2):
     i = -len(a2)
     while i < 0:
-        if len(a1) > 0 and a1[0] <= a2[i]:
+        if len(a1) == 0:
+            break
+        if a1[0] <= a2[i]:
             global count
-            count = count + 1
             a2_tmp = a2[:i]
-            a2_tmp.extend([a1.pop(0)])
+            j = 0
+            while len(a1) > j and a1[j] <= a2[i]:
+                count = count + 1
+                j = j + 1
+            a2_tmp.extend(a1[:j])
+            a1 = a1[j:]
             a2_tmp.extend(a2[i:])
             a2 = a2_tmp
         else:
@@ -65,10 +74,12 @@ print(time() - timepoint)
 #print("orgin",orgin)
 arraytoSort.sort()
 #print("sorted",arraytoSort)
+#print("sorted",newsort)
 
 for x in range(len(arraytoSort)):
     if newsort[x] != arraytoSort[x]:
-        print("false")
+        print("false", newsort[x],' ',arraytoSort[x])
+        pass
 
 print('loop times', count)
 
