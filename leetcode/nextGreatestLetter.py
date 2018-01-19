@@ -52,8 +52,15 @@ class Solution(object):
         else:
             return self.divfind(target, letters[int(length / 2) + 1:])
 
+
+
+
+
+
 sol = Solution()
 letter = sol.nextGreatestLetter(["c","f","j"],
 "c")
+
+
 
 print(letter)
