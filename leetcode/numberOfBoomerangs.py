@@ -40,7 +40,8 @@ def findBoomerangs(points):
                     setOfdistance[i].extend([distance])
     return setOfdistance
 
-distanceSet = findBoomerangs([[1,0],[0,0],[1,1],[2,2],[0,0],[2,1],[0,2],[1,0]])
+points =[[1,0],[2,0],[222,0],[222,1],[24,0],[25,0]]
+distanceSet = findBoomerangs([[1,0],[2,0],[222,0],[222,1],[24,0],[25,0]])
 sumAll = 0
 for x in distanceSet:
     x.sort()
@@ -48,13 +49,28 @@ for x in distanceSet:
     step = 1
     for i in range(len(x)):
         if i + 1 == len(x) or x[i] != x[i+1]:
-            for j in range(step, 2, -1):
-                step = step * (j - 1)
-            sum = sum + int(step / 2)
+            if step > 1:
+                step = step * (step - 1)
+            else:
+                step = 0
+            sum = sum + step
             step = 1
         else:
             step = step + 1
     print(x, sum)
     sumAll = sumAll + sum
+
+def numberOfBoomerangs(points):
+    res = 0
+    for p in points:
+        cmap = {}
+        for q in points:
+            f = p[0]-q[0]
+            s = p[1]-q[1]
+            cmap[f*f + s*s] = 1 + cmap.get(f*f + s*s, 0)
+        for k in cmap:
+            res += cmap[k] * (cmap[k] -1)
+        print(cmap)
+    return res
 print(sumAll)
 print("hello")
