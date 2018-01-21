@@ -104,6 +104,3 @@ buildheap(test)
 heapsort(test)
 print(time.time() - time1)
 testorder(test)
-
-
-
