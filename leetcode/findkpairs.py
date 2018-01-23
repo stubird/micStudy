@@ -26,6 +26,9 @@ Find the k pairs (u1,v1),(u2,v2) ...(uk,vk) with the smallest sums.
 https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/
 """
 import math
+import random
+import time
+import heapq
 
 def findkpair(array1, array2, k):
     # ar1map = {array1[i]:1 for i in range(k) if i < len(array1)}
@@ -34,39 +37,29 @@ def findkpair(array1, array2, k):
     if array1 == [] or array2 ==[]:
         return []
 
-    index = [(0,0,array1[0] + array2[0])]
-    dimension = 1
+    index = [(array1[0] + array2[0],0,0)]
     ret = []
     k = min(k, len(array1) * len(array2))
     for i in range(k):
-        cordinate = index[0]
-        ret.append([array1[cordinate[0]], array2[cordinate[1]]])
-        del index[0]
-        if len(array1) > cordinate[0] + 1:
-            unit = (cordinate[0] + 1, cordinate[1], array1[cordinate[0] + 1] + array2[cordinate[1]])
-            if len(index) > 0:
-                for x in range(len(index)):
-                    if index[x][2] > unit[2]:
-                        index = index[:x] + [unit] + index[x:]
-                        unit = None
-                        break
-                if unit != None:
-                    index.append(unit)
-            else:
-                index.append(unit)
-
+        cordinate = heapq.heappop(index)
+        ret.append([array1[cordinate[1]], array2[cordinate[2]]])
+        if len(array1) > cordinate[1] + 1:
+            unit = (array1[cordinate[1] + 1] + array2[cordinate[2]],cordinate[1] + 1,cordinate[2])
+            heapq.heappush(index, unit)
         #update index
-        if cordinate[0] == 0 and cordinate[1] + 1 < len(array2):
-            unit = (0, cordinate[1] + 1, array1[0] + array2[cordinate[1] + 1])
-            for x in range(len(index)):
-                if index[x][2] > unit[2]:
-                    index = index[:x] + [unit] + index[x:]
-                    unit = None
-                    break
-            if unit != None:
-                index.append(unit)
+        if cordinate[1] == 0 and cordinate[2] + 1 < len(array2):
+            unit = (array1[0] + array2[cordinate[2] + 1],0, cordinate[2] + 1)
+            heapq.heappush(index, unit)
     return ret
 
 
-a0 = findkpair([1,7,11,20,30], [2], 3)
-print(a0,len(a0))
+x1 = [random.randint(0,20000) for _ in range(50000)]
+x1.sort()
+x2 = [random.randint(0,20000) for _ in range(40000)]
+x2.sort()
+time1 = time.time()
+# print(x1)
+# print(x2)
+a0 = findkpair(x1, x2, 2000000)
+#print(a0)
+print(time.time() - time1)
