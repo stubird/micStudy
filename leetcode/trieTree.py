@@ -27,6 +27,7 @@ class trie():
             root = trie('root')
         lastchild = root
         for i in range(31,-1,-1):
+            #last key of the word
             lastunit = (word >> i) % 2
             if lastunit not in lastchild.children:
                 lastchild.children[lastunit] = trie(lastunit)
@@ -66,4 +67,3 @@ for num in nums:
     result = max(maxnum, result)
 
 print(result)
-
