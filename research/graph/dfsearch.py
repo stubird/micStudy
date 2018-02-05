@@ -71,3 +71,5 @@ visit(poiarray[1])
 
 for i in poiarray:
     print("p:{} link:{} d:{} f:{} id:{} c:{}".format(i.p.id if i.p != None else None,[poi.id for poi in i.link],i.d,i.f,i.id,i.c))
+
+

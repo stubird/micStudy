@@ -14,24 +14,27 @@
    limitations under the License.
 """
 
-import queue
-
 class poi:
-    def __init__(self, id, p = None, d = 0, c = 'w'):
+    def __init__(self, id, p = None,f = 0, d = 0, c = 'w'):
         self.id = id
+        #parent
         self.p = p
+        #start time
         self.d = d
+        #end time
+        self.f = f
+        #color
         self.c = c
         self.link = []
 
-
 # define a graph
-graph_matrix = [[0,1,0,0,0,0],
-                [1,0,1,0,1,0],
-                [0,1,0,1,0,0],
-                [0,0,1,0,1,0],
-                [0,1,0,1,0,1],
-                [0,0,0,0,1,0]]
+
+graph_matrix = [[0,0,1,0,0,0],
+                [1,0,0,1,0,1],
+                [0,0,0,0,1,0],
+                [0,0,0,0,0,0],
+                [0,0,0,1,0,1],
+                [0,0,0,0,0,0]]
 
 poiarray = []
 for i in range(len(graph_matrix)):
@@ -46,19 +49,27 @@ for x in poiarray:
         pois.append(poiarray[index])
     x.link = pois[:]
 
-q = queue.Queue()
+time = 0
+sortedarray = []
 
-q.put_nowait(poiarray[1])
-
-
-while not q.empty():
-    poi = q.get_nowait()
+def topsort(poi):
+    global time
+    global sortedarray
+    poi.c = 'g'
+    time += 1
+    poi.d = time
+    for son in poi.link:
+        if son.c == 'w':
+            son.p = poi
+            topsort(son)
     poi.c = 'b'
-    for relpoi in poi.link:
-        if relpoi.c == 'w':
-            q.put_nowait(relpoi)
-            relpoi.p = poi
-            relpoi.d = poi.d + 1
+    sortedarray.append(poi)
+    time += 1
+    poi.f = time
 
-for poi in poiarray:
-    print(poi.c, poi.id, poi.p.id if poi.p != None else None, poi.d)
+graph_matrix_t = [[0,0,1,0,0,0],
+                  [1,0,0,1,0,1],
+                  [0,0,0,0,1,0],
+                  [0,0,0,0,0,0],
+                  [0,0,0,1,0,1],
+                  [0,0,0,0,0,0]]
