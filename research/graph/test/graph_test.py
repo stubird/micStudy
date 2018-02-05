@@ -14,15 +14,23 @@
    limitations under the License.
 """
 
-class gpoint:
-    def __init__(self, id, p = None,f = 0, d = 0, c = 'w'):
-        self.id = id
-        #parent
-        self.p = p
-        #start time
-        self.d = d
-        #end time
-        self.f = f
-        #color
-        self.c = c
+import sys
+sys.path.append("..")
+#这里直接引用了文件
+import graph as gh
+import numpy as np
+
+g = gh.graph()
+grAry = [[1,2],[],[1,3,4],[4],[],[]]
+g.createRootByAry(grAry)
+for i in g.outonly:
+    print(i.id)
+
+gb = gh.bfsgraph()
+print(gb.name)
+gb.createByAry(grAry)
+for i in gb.outonly:
+    print(i.id)
+
+
 

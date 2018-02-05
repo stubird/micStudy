@@ -13,16 +13,3 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
-
-class gpoint:
-    def __init__(self, id, p = None,f = 0, d = 0, c = 'w'):
-        self.id = id
-        #parent
-        self.p = p
-        #start time
-        self.d = d
-        #end time
-        self.f = f
-        #color
-        self.c = c
-
