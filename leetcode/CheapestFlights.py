@@ -13,29 +13,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
-le = 4
-a = [
-    [i for i in range(le)].lambda x:[i+le*x for i in range(le)]
-]
+#787
+import collections
+import heapq
 
-loop = 0
-mid = len(a) - 1
-ret = []
-while True:
-    if mid == 0:
-        ret.append(a[len(a)//2][len(a)//2])
-        break
-    elif mid == -1:
-        break
-
-    n = loop + mid
-    ret.extend(a[loop][loop:n])
-    for i in range(loop, n):
-        ret.append(a[i][n])
-    ret.extend(a[n][loop+1:n+1][::-1])
-    for i in range(n, loop, -1):
-        ret.append(a[i][loop])
-    mid -= 2
-    loop += 2
-
-print(ret)
+def findCheapestPrice(self, n, flights, src, dst, k):
+    f = collections.defaultdict(dict)
+    for a, b, p in flights:
+        f[a][b] = p
+    heap = [(0, src, k + 1)]
+    while heap:
+        p, i, k = heapq.heappop(heap)
+        if i == dst:
+            return p
+        if k > 0:
+            for j in f[i]:
+                heapq.heappush(heap, (p + f[i][j], j, k - 1))
+    return -1

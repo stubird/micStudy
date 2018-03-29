@@ -13,26 +13,24 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
-s="barfoothefoobarmanxfoobardnfooifoobar"
-words = ["foo", "bar"]
-qwords = words[:]
-i = 0
-indice = []
-while True:
-    if i >= len(s):
-        break
-    if s[i:i+3] in qwords:
-        qwords.pop(qwords.index(s[i:i+3]))
-        i+=3
-        if qwords == []:
-            indice.append(i - len(words[0])*len(words))
-            qwords = words[:]
-    elif len(qwords) < len(words):
-        qwords = words[:]
-        i += 1
+
+
+def bipartite(graph):
+    colors = [-1] * len(graph)
+    cur_color = 1
+    return all([dfs(graph, i, edges, colors, cur_color) for i, edges in enumerate(graph) if colors[i] == -1])
+
+def dfs(graph, i, edges, colors, cur_color):
+    if colors[i] == -1:
+        colors[i] = cur_color
     else:
-        i+=1
-print(indice)
+        if colors[i] != cur_color:
+            return False
+        else:
+            return True
 
+    return all([dfs(graph, j, graph[j], colors, not cur_color) for j in edges])
 
-
+a = [[1,3], [0,2], [1,3], [0,2]]
+a = [[1,2,3], [0,2], [0,1,3], [0,2]]
+print(bipartite(a))
